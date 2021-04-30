@@ -8,8 +8,8 @@ class MaterialExamplePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       physics: SnapScrollPhysics(snaps: [
-        PreventSnapArea(0, 200.0 - kToolbarHeight),
-        PreventSnapArea(200.0 - kToolbarHeight, 200.0)
+        Snap.avoidZone(0, 200.0 - kToolbarHeight),
+        Snap.avoidZone(200.0 - kToolbarHeight, 200.0)
       ]),
       slivers: [
         SliverAppBar(

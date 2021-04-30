@@ -11,15 +11,15 @@ final kMusicCoverImageUrl =
     'https://images.unsplash.com/photo-1502773860571-211a597d6e4b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80';
 
 class MusicExamplePage extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     final expandedHeight = 600.0;
     return CustomScrollView(
-      physics: SnapScrollPhysics.preventStopInZones(
-        areas: [
-          PreventSnapArea(0, 100, 0),
-          PreventSnapArea(expandedHeight - kToolbarHeight - 100,
-              expandedHeight - kToolbarHeight, expandedHeight - kToolbarHeight),
+      physics: SnapScrollPhysics.builder(
+        () => [
+          Snap(0, trailingDistance: 100),
+          Snap(expandedHeight - kToolbarHeight, leadingDistance: 100),
         ],
       ),
       slivers: [

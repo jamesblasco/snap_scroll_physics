@@ -13,6 +13,16 @@ mixin _SnapScrollPhysics on ScrollPhysics {
 }
 
 abstract class SnapScrollPhysics extends ScrollPhysics with _SnapScrollPhysics {
+  factory SnapScrollPhysics({
+    ScrollPhysics? parent,
+    List<Snap> snaps,
+  }) = RawSnapScrollPhysics;
+
+  factory SnapScrollPhysics.builder(
+    SnapBuilder builder, {
+    ScrollPhysics? parent,
+  }) = BuilderSnapScrollPhysics;
+
   static final cupertinoAppBar = SnapScrollPhysics._forCupertinoAppBar();
 
   factory SnapScrollPhysics._forCupertinoAppBar() =
@@ -25,21 +35,9 @@ abstract class SnapScrollPhysics extends ScrollPhysics with _SnapScrollPhysics {
     ScrollPhysics? parent,
   }) {
     return SnapScrollPhysics(parent: parent, snaps: [
-      PreventSnapArea(minExtent, maxExtent, delimiter),
+      Snap.avoidZone(minExtent, maxExtent, delimiter: delimiter),
     ]);
   }
-
-  factory SnapScrollPhysics.preventStopInZones({
-    required List<PreventSnapArea> areas,
-    ScrollPhysics? parent,
-  }) {
-    return SnapScrollPhysics(parent: parent, snaps: areas);
-  }
-
-  factory SnapScrollPhysics({
-    ScrollPhysics? parent,
-    List<Snap> snaps,
-  }) = RawSnapScrollPhysics;
 }
 
 class RawSnapScrollPhysics extends BaseSnapScrollPhysics {
@@ -63,14 +61,34 @@ class RawSnapScrollPhysics extends BaseSnapScrollPhysics {
 class CupertinoAppBarSnapScrollPhysics extends BaseSnapScrollPhysics {
   CupertinoAppBarSnapScrollPhysics({ScrollPhysics? parent})
       : super(parent: parent);
-
+  @override
   final List<Snap> snaps = [
-    PreventSnapArea(0, _kNavBarLargeTitleHeightExtension)
+    Snap.avoidZone(0, _kNavBarLargeTitleHeightExtension)
   ];
 
   @override
   CupertinoAppBarSnapScrollPhysics applyTo(ScrollPhysics? ancestor) {
     return CupertinoAppBarSnapScrollPhysics(
+      parent: buildParent(ancestor),
+    );
+  }
+}
+
+typedef SnapBuilder = List<Snap> Function();
+
+class BuilderSnapScrollPhysics extends BaseSnapScrollPhysics {
+  BuilderSnapScrollPhysics(this.builder, {ScrollPhysics? parent})
+      : super(parent: parent);
+
+  final SnapBuilder builder;
+
+  @override
+  List<Snap> get snaps => builder();
+
+  @override
+  BuilderSnapScrollPhysics applyTo(ScrollPhysics? ancestor) {
+    return BuilderSnapScrollPhysics(
+      builder,
       parent: buildParent(ancestor),
     );
   }

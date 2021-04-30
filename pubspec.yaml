@@ -1,7 +1,7 @@
 name: snap_scroll_physics
 description: A new Flutter package project.
-version: 0.0.1
-homepage:
+version: 0.0.1+1
+homepage: https://github.com/jamesblasco/snap_scroll_physics
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
