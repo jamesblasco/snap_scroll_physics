@@ -21,6 +21,18 @@ physics: SnapScrollPhysics(
 ),
 ```
 
+
+```dart
+physics: SnapScrollPhysics.cupertinoAppBar, // Default values for the Cupertino appbar
+```
+
+
+https://user-images.githubusercontent.com/19904063/116775316-b67b8f80-aa62-11eb-9ae1-58da68a381e4.mp4
+
+
+https://user-images.githubusercontent.com/19904063/116775452-56391d80-aa63-11eb-95ae-f8fd8154cbc9.mp4
+
+
 IMPORTANT! Sadly ScrollPhysics are not reactivily updated, so if you change the values, they won't be automatically  updated. [See #80051](https://github.com/flutter/flutter/issues/80051).
 
 
@@ -43,19 +55,4 @@ List<Snap> getSnaps() {
   }
 ```
 
-
-
-
-```dart
-physics: SnapScrollPhysics.cupertinoAppBar, // Default values for the Cupertino appbar
-```
-
-
-
-
-
-https://user-images.githubusercontent.com/19904063/116775316-b67b8f80-aa62-11eb-9ae1-58da68a381e4.mp4
-
-
-https://user-images.githubusercontent.com/19904063/116775452-56391d80-aa63-11eb-95ae-f8fd8154cbc9.mp4
 
