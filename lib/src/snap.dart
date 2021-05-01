@@ -1,8 +1,6 @@
 import 'package:flutter/widgets.dart';
 
 abstract class Snap {
-  
-  
   factory Snap(
     double extent, {
     double? distance = 10,
@@ -83,12 +81,7 @@ class _PreventSnapArea implements Snap {
     Tolerance tolerance,
     double velocity,
   ) {
-    /*  if (velocity > tolerance.velocity) {
-      return maxExtent;
-    } else if (velocity < -tolerance.velocity) {
-      return minExtent;
-    } else  */
-    if (delimiter > proposedEnd) {
+    if (delimiter < proposedEnd) {
       return maxExtent;
     } else {
       return minExtent;

@@ -36,13 +36,14 @@ class _MyHomePageState extends State<MyHomePage> {
   int index = 0;
   @override
   Widget build(BuildContext context) {
+    bool showBottomBar = true;
     return Scaffold(
       body: [
         () => MaterialExamplePage(),
         () => CupertinoExamplePage(),
         () => MusicExamplePage(),
       ][index](),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: showBottomBar ? BottomNavigationBar(
         currentIndex: index,
         onTap: (index) => setState(() => this.index = index),
         items: [
@@ -59,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.music_note),
           )
         ],
-      ),
+      ) : null,
     );
   }
 }

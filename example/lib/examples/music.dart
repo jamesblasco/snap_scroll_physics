@@ -16,8 +16,8 @@ class MusicExamplePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final expandedHeight = 600.0;
     return CustomScrollView(
-      physics: SnapScrollPhysics.builder(
-        () => [
+      physics: SnapScrollPhysics(
+        snaps: [
           Snap(0, trailingDistance: 100),
           Snap(expandedHeight - kToolbarHeight, leadingDistance: 100),
         ],
